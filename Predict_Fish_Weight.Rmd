@@ -66,6 +66,30 @@ subsets(Perch.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
 ```
 ### Best Models
 
+```{r, echo=FALSE}
+library(leaps)
+regsubsets.out <-
+    regsubsets(Weight ~ .,
+               data = Perch,
+               nbest = 1,       # 1 best model for each number of predictors
+               nvmax = NULL,    # NULL for no limit on number of variables
+               force.in = NULL, force.out = NULL,
+               method = "exhaustive")
+
+summary.out <- summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend="bottom",main="Adjusted R^2")
+```
+### Best Models
+
+```{r, echo=FALSE}
+which.max(summary.out$adjr2)
+```
+```{r, echo=FALSE}
+summary.out$which[2,]
+```
+
 The best predictor model for Perch weight is a two element model made up of the height and width of the Perch. This model was selected as being the best based on its adjusted r-squared value of 0.94 which is the highest of the 2 element models and overall between the top models of each element count 1-5 for Perch Weight Prediction.
 
 ### Best Two regressor model
