@@ -152,7 +152,34 @@ subsets(Roach.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
 
 ### Best Models
 
-Best Model - Width + Length Three
+```{r, echo=FALSE}
+library(leaps)
+regsubsets.out <-
+    regsubsets(Weight ~ .,
+               data = Roach,
+               nbest = 1,       # 1 best model for each number of predictors
+               nvmax = NULL,    # NULL for no limit on number of variables
+               force.in = NULL, force.out = NULL,
+               method = "exhaustive")
+
+summary.out <- summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend="bottomleft",main="Adjusted R^2")
+```
+```{r, echo=FALSE}
+which.max(summary.out$adjr2)
+```
+```{r, echo=FALSE}
+summary.out$which[2,]
+```
+
+The best predictor model for Roach weight is a two element model made up of the length-3 and width of the Roach. This model was selected as being the best based on its adjusted r-squared value of 0.8482 which is the highest of the 2 element models and overall between the top models of each element count 1-5 for Roach Weight Prediction.
+
+```{r, echo=FALSE}
+best.model <- lm(Weight~Width+Length3,data=Roach)
+summary(best.model)
+```
 
 ### Best Two regressor model
 
