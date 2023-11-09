@@ -122,4 +122,4 @@ Best Two Regression Model - Length 3 + Width
 
 ## Final Summary Statements
 
-We can see from the results here that there are vary different predicting metrics amoung these fish species. For the Perch, Pike, and Roach each had unique models that best predict overall weight. Automation was key in determining the model of best fit.
+Only for Pike did the two element model not represent the best overall model for prediction of weight. Both the Perch and Roach had a two element model as their best predictor of weight. However the prediction models for Roach weight were significantly less accurate on average based on their adjusted r-squared values compared to those of the models of the other two fish species.
